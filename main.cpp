@@ -6,17 +6,19 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:36:39 by esafar            #+#    #+#             */
-/*   Updated: 2022/10/26 18:11:45 by esafar           ###   ########.fr       */
+/*   Updated: 2022/10/26 18:23:54 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
 #include <iostream>
-#include <string>
 
 // test std::vector
 int main(int ac, char **av)
 {
+    (void)ac;
+    (void)av;
+    
     // using ::iterator and ::reverse_iterator
     std::vector<int> v;
     std::vector<int>::iterator it;
@@ -77,5 +79,25 @@ int main(int ac, char **av)
         it2++;
     }
     
+    // testing clear() function
+    v.clear();
+    it = v.begin();
+    while (it != v.end())
+    {
+        std::cout << *it << std::endl;
+        it++;
+    }
+    std::cout << "Max capacity: " << v.capacity() << std::endl;
+    
+    // testing erase() function
+    v.erase(v.begin(), v.end());
+    it = v.begin();
+    while (it != v.end())
+    {
+        std::cout << *it << std::endl;
+        it++;
+    }
+    std::cout << "Max capacity: " << v.capacity() << std::endl;
+
     return (0);
 }
