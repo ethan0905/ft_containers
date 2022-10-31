@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:36:39 by esafar            #+#    #+#             */
-/*   Updated: 2022/10/26 18:26:47 by esafar           ###   ########.fr       */
+/*   Updated: 2022/10/31 13:16:11 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,20 @@ int main(int ac, char **av)
         it++;
     }
     std::cout << "Max capacity: " << v.capacity() << std::endl;
+
+    std::cout << "==================================" << std::endl;
+
+    // std::allocator test
+    std::allocator<int> a;
+
+    int *p = a.allocate(5);
+    for (int i = 0; i < 5; i++)
+        a.construct(&p[i], i);
+    for (int i = 0; i < 5; i++)
+        std::cout << p[i] << std::endl;
+    for (int i = 0; i < 5; i++)
+        a.destroy(&p[i]);
+    a.deallocate(p, 5);
 
     return (0);
 }
