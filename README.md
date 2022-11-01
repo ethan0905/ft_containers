@@ -1,6 +1,6 @@
 # ft_containers 📦📦📦
   
-## Strat for ft_containers - [save some time] ⏱️  
+## Strat for ft_containers ⏱️  
   
 1. Start by coding all std functions (you gonna be able to use them later, inside your containers)  
 2. Then, begin coding stack as your first container using original vector from STL.  
