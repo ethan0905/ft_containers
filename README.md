@@ -1,13 +1,13 @@
 # ft_containers 📦📦📦
   
-## Strat for ft_containers - [save some time]  
+## Strat for ft_containers - [save some time] ⏱️  
   
 1. Start by coding all std functions (you gonna be able to use them later, inside your containers)  
 2. Then, begin coding stack as your first container using original vector from STL.  
 3. When your stack container works properly. start coding vector container and test it with your stack container.  
 4. Final step, code map and drop a star on this repo for the time you saved.    
   
-## Namespaces  
+## Namespaces 👨🏻‍🚀🚀  
   
 #### std::equal  
 https://en.cppreference.com/w/cpp/algorithm/equal  
@@ -26,5 +26,5 @@ https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-4.3/a02030.html
 #### std::enable_if  
 https://eli.thegreenplace.net/2014/sfinae-and-enable_if/  
   
-## Usefull documentation  
+## Usefull documentation 🗃️  
 https://en.cppreference.com/w/cpp/container/vector  
