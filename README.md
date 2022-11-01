@@ -1,5 +1,11 @@
 # ft_containers
   
+## Strat for containers to save some time  
+1- Start by coding all std functions (you gonna be able to use them later, inside your containers)  
+2- Then, begin coding stack as your first container using original vector from STL.  
+3- When your stack container works properly. start coding vector container and test it with your stack container.  
+4- Final step, code map.  
+
 ### Usefull documentation  
 https://en.cppreference.com/w/cpp/container/vector  
 
