@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:25:57 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/01 19:01:22 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/01 19:24:01 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "lexicographical_compare.hpp"
 #include "is_integral.hpp"
 #include "pair.hpp"
+#include "enable_if.hpp"
 
 #include <vector>
 
@@ -109,5 +110,18 @@ int main()
     std::cout << "std:: The price of " << std_product3.first << " is $" << std_product3.second << '\n';
     std::cout << "ft:: The price of " << product3.first << " is $" << product3.second << "\n\n";
 
+    std::cout << std::endl << std::endl;
+    std::cout << "===============STD::ENABLE_IF===============" << std::endl;
+    
+    short int i = 1;    // code does not compile if type of i is not integral
+
+    std::cout << std::boolalpha;
+    
+    std::cout << "std:: i is odd: " << is_odd_std(i) << std::endl;
+    std::cout << "ft:: i is odd: " << is_odd_ft(i) << std::endl << std::endl;
+    
+    std::cout << "std:: i is even: " << is_even_std(i) << std::endl;
+    std::cout << "ft:: i is even: " << is_even_ft(i) << std::endl;
+    
     return (0);
 }
