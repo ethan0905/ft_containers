@@ -1,55 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   namespace.cpp                                      :+:      :+:    :+:   */
+/*   namespace_test.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:25:57 by esafar            #+#    #+#             */
-/*   Updated: 2022/10/31 14:17:49 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/01 17:24:46 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "equal.hpp"
+#include "lexicographical_compare.hpp"
+#include "is_integral.hpp"
+
 #include <vector>
-
-// re-code equal from std (std::equal)
-namespace ft
-{
-    template <class InputIterator1, class InputIterator2>
-    bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
-    {
-        while (first1 != last1)
-        {
-            // std::cout << "OUTP: " << *first1 << " " << *first2 << std::endl;
-            if (!(*first1 == *first2))
-                return false; 
-            ++first1;
-            ++first2;
-        }
-        return true;
-    }
-}
-
-// re-code lexicographical_compare from std (std::lexicographical_compare)
-namespace ft
-{
-    template <class InputIterator1, class InputIterator2>
-    bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2)
-    {
-        while (first1 != last1)
-        {
-            // std::cout << "OUTP: " << *first1 << " " << *first2 << std::endl;
-            if (first2 == last2 || *first2 < *first1)
-                return false;
-            else if (*first1 < *first2)
-                return true;
-            ++first1;
-            ++first2;
-        }
-        return (first2 != last2);
-    }
-}
 
 int main()
 {
@@ -68,6 +33,8 @@ int main()
     v2.push_back(4);
     v2.push_back(5);
 
+    std::cout << "===============STD::EQUAL===============" << std::endl;
+
     if (std::equal(v1.begin(), v1.end(), v2.begin()))
         std::cout << "std::equal: true" << std::endl;
     else
@@ -80,6 +47,8 @@ int main()
 
     std::cout << std::endl;
 
+    std::cout << "===============STD::LEXICO===============" << std::endl;
+
     if (std::lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end()))
         std::cout << "std::lexicographical_compare: true" << std::endl;
     else
@@ -89,6 +58,25 @@ int main()
         std::cout << "ft::lexicographical_compare: true" << std::endl;
     else
         std::cout << "ft::lexicographical_compare: false" << std::endl;
+
+    std::boolalpha(std::cout << std::endl);
+    
+    std::cout << "===============STD::IS_INTEGRAL===============" << std::endl;
+    
+    std::cout << "is_integral<int> : " << std::is_integral<int>::value << std::endl;
+    std::cout << "is_integral<int> : " << ft::is_integral<int>::value << std::endl << std::endl;
+    
+    std::cout << "is_integral<char> : " << std::is_integral<char>::value << std::endl;
+    std::cout << "is_integral<char> : " << ft::is_integral<char>::value << std::endl << std::endl;
+    
+    std::cout << "is_integral<float> : " << std::is_integral<float>::value << std::endl;
+    std::cout << "is_integral<float> : " << ft::is_integral<float>::value << std::endl << std::endl;
+    
+    std::cout << "is_integral<double> : " << std::is_integral<double>::value << std::endl;
+    std::cout << "is_integral<double> : " << ft::is_integral<double>::value << std::endl << std::endl;
+    
+    std::cout << "is_integral<std::string> : " << std::is_integral<std::string>::value << std::endl;
+    std::cout << "is_integral<std::string> : " << ft::is_integral<std::string>::value << std::endl;
 
     return (0);
 }
