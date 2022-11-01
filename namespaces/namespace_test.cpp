@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 13:25:57 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/01 18:21:26 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/01 19:01:22 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int main()
     std::pair <std::string,double> std_product1;                     // default constructor
     std::pair <std::string,double> std_product2 ("tomatoes",2.30);   // value init
     std::pair <std::string,double> std_product3 (std_product2);          // copy constructor
-
     ft::pair <std::string,double> product1;                     // default constructor
     ft::pair <std::string,double> product2 ("tomatoes",2.30);   // value init
     ft::pair <std::string,double> product3 (product2);          // copy constructor
