@@ -22,6 +22,20 @@
 3. When your stack container works properly. start coding vector container and test it with your stack container.  
 4. Final step, code map and drop a star on this repo for the time I saved you ;)    
   
+## Tools (typedef, explicit, friend)  
+  
+**1. typedef:** allows to give a new name to an existing data type.  
+```
+template <class T, ...>
+class stack {
+	typedef T value_type;
+	value_type& top() {
+   		return (_container.back());
+	}
+```
+**2. explicit:** allows only direct-initialization (avoid implicit conversions and copy initialization from braced-init-list).  
+**3. friend:** allows a function to access private and protected members of a class.  
+  
 ## Namespaces 👨🏻‍🚀🚀  
   
 #### std::equal  
