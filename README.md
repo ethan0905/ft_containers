@@ -10,8 +10,8 @@
 ## Strat for ft_containers ⏱️  
   
 1. Start by coding all std functions asked in the subject (you gonna be able to use them later, inside your containers)  
-⋅⋅⋅a. std::equal  
-⋅⋅⋅b. std::lexicographical_compare  
+⋅⋅⋅ a. std::equal  
+⋅⋅⋅ b. std::lexicographical_compare  
 ⋅⋅⋅c. std::is_integral  
 ⋅⋅⋅d. std::pair  
 ⋅⋅⋅e. std::make_pair  
