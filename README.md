@@ -9,18 +9,18 @@
   
 ## Strat for ft_containers ⏱️  
   
-1. Start by coding all std functions asked in the subject (you gonna be able to use them later, inside your containers)  
-      a. std::equal  
-      b. std::lexicographical_compare  
-      c. std::is_integral  
-      d. std::pair  
-      e. std::make_pair  
-      f. std::enable_if  
-      g. std::iterator_traits  
-      h. std::reverse_iterator  
-2. Then, begin coding stack as your first container using original vector from STL.  
-3. When your stack container works properly. start coding vector container and test it with your stack container.  
-4. Final step, code map and drop a star on this repo for the time I saved you ;)    
+**1.** Start by coding all std functions asked in the subject (you gonna be able to use them later, inside your containers)  
+      **a.** std::equal  
+      **b.** std::lexicographical_compare  
+      **c.** std::is_integral  
+      **d.** std::pair  
+      **e.** std::make_pair  
+      **f.** std::enable_if  
+      **g.** std::iterator_traits  
+      **h.** std::reverse_iterator  
+**2.** Then, begin coding stack as your first container using original vector from STL.  
+**3.** When your stack container works properly. start coding vector container and test it with your stack container.  
+**4.** Final step, code map and drop a star on this repo for the time I saved you ;)    
   
 ## Namespaces 👨🏻‍🚀🚀  
   
