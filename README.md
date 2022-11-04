@@ -28,12 +28,37 @@
 ```
 template <class T, ...>
 class stack {
-	typedef T value_type;
-	value_type& top() {
-   		return (_container.back());
-	}
+	public:
+		typedef T value_type;
+		
+		value_type& top() {
+   			return (_container.back());
+		}
+	[...]
+};
 ```
 **2. explicit:** allows only direct-initialization (avoid implicit conversions and copy initialization from braced-init-list).  
+```
+class stack {
+	public:
+		explicit stack(const Container &ctnr) : _container(ctnr) {}
+	[...]
+};
+
+int main()
+{
+	std::vector<int> vector_std;
+	for (int i = 0; i <= 10; i++)
+        	vector_std.push_back(i);
+	
+   	std::stack<int, std::vector<int> > stack_std = vector_std;
+}
+
+...
+
+>> error: no viable conversion [...] explicit constructor is not a candidat.
+
+```
 **3. friend:** allows a function to access private and protected members of a class.  
   
 ## Namespaces 👨🏻‍🚀🚀  
