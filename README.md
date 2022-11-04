@@ -60,7 +60,18 @@ int main()
 
 ```
 **3. friend:** allows a function to access private and protected members of a class.  
-  
+```
+class stack {
+	private:
+		Container _container;
+	public:
+		friend bool operator==(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
+			return (lhs._container == rhs._container);
+		}
+	[...]
+};
+
+```
 ## Namespaces 👨🏻‍🚀🚀  
   
 #### std::equal  
