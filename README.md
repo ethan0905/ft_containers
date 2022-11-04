@@ -39,7 +39,10 @@ class stack {
 ```
 **2. explicit:** allows only direct-initialization (avoid implicit conversions and copy initialization from braced-init-list).  
 ```
+template <class T, class Container>
 class stack {
+	private:
+		Container _container;
 	public:
 		explicit stack(const Container &ctnr) : _container(ctnr) {}
 	[...]
@@ -61,6 +64,7 @@ int main()
 ```
 **3. friend:** allows a function to access private and protected members of a class.  
 ```
+template <class T, class Container>
 class stack {
 	private:
 		Container _container;
