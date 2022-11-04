@@ -1,11 +1,26 @@
 # ft_containers 📦📦📦
   
-## Strat for ft_containers - [save some time] ⏱️  
+## Containers/Algorithm/Iterators 📚🔢📐  
+#### In C++ STL (Standard Template Library), 3 things are meaningful and important:  
   
-1. Start by coding all std functions (you gonna be able to use them later, inside your containers)  
+**1. Containers:** These are used to manage collection of objects of a certain kind. Containers can be of two types: Sequence Containers (vector, deque, list) and Associative Containers (Set, Multiset, Map, Multimap).  
+**2. Algorithms:** These are used to process the elements of a collection. That is algorithms feed from containers and process those elements in a predefined way and may also push the results into the same/different container.  
+**3. Iterator:** These are used to step through the elements of collection of objects (aka containers).  
+  
+## Strat for ft_containers ⏱️  
+  
+1. Start by coding all std functions asked in the subject (you gonna be able to use them later, inside your containers)  
+		- std::equal  
+		- std::lexicographical_compare  
+		- std::is_integral  
+		- std::pair  
+		- std::make_pair  
+		- std::enable_if  
+		- std::iterator_traits  
+		- std::reverse_iterator  
 2. Then, begin coding stack as your first container using original vector from STL.  
 3. When your stack container works properly. start coding vector container and test it with your stack container.  
-4. Final step, code map and drop a star on this repo for the time you saved.    
+4. Final step, code map and drop a star on this repo for the time I saved you ;)    
   
 ## Namespaces 👨🏻‍🚀🚀  
   
@@ -25,6 +40,9 @@ https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-4.3/a02030.html
   
 #### std::enable_if  
 https://eli.thegreenplace.net/2014/sfinae-and-enable_if/  
+  
+#### std::iterator_traits  
+https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits  
   
 ## Usefull documentation 🗃️  
 https://en.cppreference.com/w/cpp/container/vector  
