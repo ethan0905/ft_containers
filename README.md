@@ -1,4 +1,4 @@
-# ft_containers 📦📦📦
+# ft_containers 📦📦📦 [![esafar's 42 ft_containers Score](https://badge42.vercel.app/api/v2/cl6l739qg00490gialxmtgsrk/project/2852806)](https://github.com/JaeSeoKim/badge42)
   
 ## Containers/Algorithm/Iterators 📚🔢📐  
 #### In C++ STL (Standard Template Library), 3 things are meaningful and important:  
@@ -9,19 +9,73 @@
   
 ## Strat for ft_containers ⏱️  
   
-1. Start by coding all std functions asked in the subject (you gonna be able to use them later, inside your containers)  
-		- std::equal  
-		- std::lexicographical_compare  
-		- std::is_integral  
-		- std::pair  
-		- std::make_pair  
-		- std::enable_if  
-		- std::iterator_traits  
-		- std::reverse_iterator  
+1. Start by coding all std functions asked in the subject (you gonna be able to use them later, inside your containers)
+	- equal
+	- lexicographical_compare
+	- is_integral
+	- pair
+	- make_pair
+	- enable_if
+	- iterator_traits
+	- reverse_iterator
 2. Then, begin coding stack as your first container using original vector from STL.  
 3. When your stack container works properly. start coding vector container and test it with your stack container.  
 4. Final step, code map and drop a star on this repo for the time I saved you ;)    
   
+## Tools (typedef, explicit, friend)  
+  
+**1. typedef:** allows to give a new name to an existing data type.  
+```
+template <class T, ...>
+class stack {
+	public:
+		typedef T value_type;
+		
+		value_type& top() {
+   			return (_container.back());
+		}
+	[...]
+};
+```
+**2. explicit:** allows only direct-initialization (avoid implicit conversions and copy initialization from braced-init-list).  
+```
+template <class T, class Container>
+class stack {
+	private:
+		Container _container;
+	public:
+		explicit stack(const Container &ctnr) : _container(ctnr) {}
+	[...]
+};
+
+int main()
+{
+	std::vector<int> vector_std;
+	for (int i = 0; i <= 10; i++)
+        	vector_std.push_back(i);
+	
+   	std::stack<int, std::vector<int> > stack_std = vector_std;
+}
+
+...
+
+>> error: no viable conversion [...] explicit constructor is not a candidat.
+
+```
+**3. friend:** allows a function to access private and protected members of a class.  
+```
+template <class T, class Container>
+class stack {
+	private:
+		Container _container;
+	public:
+		friend bool operator==(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
+			return (lhs._container == rhs._container);
+		}
+	[...]
+};
+
+```
 ## Namespaces 👨🏻‍🚀🚀  
   
 #### std::equal  
