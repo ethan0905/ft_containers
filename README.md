@@ -37,6 +37,14 @@ class stack {
 	[...]
 };
 ```
+
+**1.bis typename:** let the compiler know that Iter is a type and not a static member of std::vector  
+```
+  
+typedef typename std::vector<T>::iterator Iter  
+  
+```
+
 **2. explicit:** allows only direct-initialization (avoid implicit conversions and copy initialization from braced-init-list).  
 ```
 template <class T, class Container>
