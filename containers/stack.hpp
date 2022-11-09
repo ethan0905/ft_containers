@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:17:23 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/04 17:00:28 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/09 16:26:39 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ namespace ft
         public:
             typedef T value_type;
             typedef Container container_type;
-            // typedef size_t size_type;
 
         private:
             container_type _container;
 
         public:
             explicit stack(const container_type& ctnr = container_type()) : _container(ctnr) {}
+            // constructor missing
             bool empty() const {
                 return (_container.empty());
             }
@@ -54,6 +54,7 @@ namespace ft
                 _container.pop_back();
             }
             
+            // surcharge d'operateur missing
             friend bool operator==(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
                 return (lhs._container == rhs._container);
             }
