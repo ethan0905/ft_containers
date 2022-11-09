@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:17:23 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/09 17:22:06 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:23:45 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ namespace ft
             typedef T value_type;
             typedef Container container_type;
 
-        private:
+        protected:
             container_type _container;
 
         public:
