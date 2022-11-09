@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:17:23 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/09 16:26:39 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:22:06 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,35 @@ namespace ft
             container_type _container;
 
         public:
+            // constructor/ destructor / operator=
             explicit stack(const container_type& ctnr = container_type()) : _container(ctnr) {}
-            // constructor missing
-            bool empty() const {
-                return (_container.empty());
+            ~stack() {}
+            stack& operator=(const stack& x) {
+                _container = x._container;
+                return (*this);
             }
-            size_t size() const {
-                return (_container.size());
-            }
+            // element access
             value_type& top() {
                 return (_container.back());
             }
             const value_type& top() const {
                 return (_container.back());
             }
+            // capacity
+            bool empty() const {
+                return (_container.empty());
+            }
+            size_t size() const {
+                return (_container.size());
+            }
+            // modifiers
             void push(const value_type& val) {
                 _container.push_back(val);
             }
             void pop() {
                 _container.pop_back();
             }
-            
-            // surcharge d'operateur missing
+            // relational operators
             friend bool operator==(const stack<T, Container>& lhs, const stack<T, Container>& rhs) {
                 return (lhs._container == rhs._container);
             }
