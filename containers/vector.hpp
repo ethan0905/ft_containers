@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/11 18:16:42 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/11 18:41:35 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,17 @@ namespace ft
                 for (size_type i = 0; i < n; i++)
                     _alloc.construct(_vector + i, val);
             }
-            // template <class InputIterator>
-            // vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) {
-            //     std::cout << CYAN "Constructor with iterators" END << std::endl;
-            //     for (InputIterator it = first; it != last; it++)
-            //         push_back(*it);
-            // }
+            template <class InputIterator>
+            vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) {
+                std::cout << CYAN "Constructor with iterators" END << std::endl;
+                InputIterator it = first;
+                
+                while (it != last)
+                {
+                    push_back(*it);
+                    it++;
+                }
+            }
             vector(const vector& x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0) {
                 std::cout << CYAN "Copy constructor" END << std::endl;
                 for (size_type i = 0; i < x._size; i++)
