@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/11 18:41:35 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/11 20:15:10 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,18 @@ namespace ft
                 for (size_type i = 0; i < n; i++)
                     _alloc.construct(_vector + i, val);
             }
+            // use enable_if to check if the type is an iterator and is_integral to check if it's an integer
             template <class InputIterator>
             vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) {
                 std::cout << CYAN "Constructor with iterators" END << std::endl;
-                InputIterator it = first;
+                InputIterator it;
                 
-                while (it != last)
+                while (first != last)
                 {
-                    push_back(*it);
-                    it++;
+                    it = *first;
+                    std::cout << "Here: " << (*first) << std::endl;
+                    // push_back(*it);
+                    first++;
                 }
             }
             vector(const vector& x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0) {
