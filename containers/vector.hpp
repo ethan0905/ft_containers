@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/13 20:13:24 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/13 20:30:56 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ namespace ft
             // Constructors
             explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) { std::cout << CYAN "Default constructor" END << std::endl; }
             explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(n), _capacity(n), _vector(_alloc.allocate(n)){
-                std::cout << CYAN "Constructor with n and val" END << std::endl;
+                std::cout << CYAN "Constructor with n and val called" END << std::endl;
                 for (size_type i = 0; i < n; i++)
                     _alloc.construct(_vector + i, val);
             }
@@ -50,31 +50,24 @@ namespace ft
             template<class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL)
 				: _alloc(alloc), _capacity(0), _size(0) {
-				// size_type count = last - first;
-				// _capacity = count;
-				// _vector = _alloc.allocate(count);
-				// for (size_type i = 0; i < count; i++) {
-				// 	_alloc.construct(_vector + i, *(first + i));
-				// }
-				// _size = _capacity;
-                std::cout << CYAN "Constructor with iterators" END << std::endl;
+                std::cout << CYAN "Constructor with iterators called" END << std::endl;
                 for (InputIterator it = first; it != last; it++)
                     push_back(*it);
-			};
+			}
             vector(const vector& x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0) {
-                std::cout << CYAN "Copy constructor" END << std::endl;
+                std::cout << CYAN "Copy constructor called" END << std::endl;
                 for (size_type i = 0; i < x._size; i++)
                     push_back(x._vector[i]);
             }
             ~vector() {
-                std::cout << RED "Destructor" END << std::endl;
+                std::cout << RED "Destructor called" END << std::endl;
                 for (size_type i = 0; i < _size; i++)
                     _alloc.destroy(_vector + i);
                 _alloc.deallocate(_vector, _capacity);
             }
             // Operators
             vector& operator=(const vector& x) {
-                std::cout << CYAN "Assignation = operator" END << std::endl;
+                std::cout << CYAN "Assignation = operator called" END << std::endl;
                 if (this != &x)
                 {
                     for (size_type i = 0; i < _size; i++)
