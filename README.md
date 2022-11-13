@@ -84,6 +84,26 @@ class stack {
 };
 
 ```
+
+## Potential mistakes !
+```
+vector.hpp:52:31: error: invalid type argument of unary ‘*’ (have ‘int’)
+   52 |                     push_back(*it);
+      |                               ^~~
+      
+inside this specific constructor:  
+template<class InputIterator>
+vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(0), _size(0) {
+	for (InputIterator it = first; it != last; it++)
+        	push_back(*it);
+}
+```
+To fix this, you gonna need to use enable_if to check if the user pass as a 4th parameter an iterator, that has the type of an integral integer (is_integral)
+```
+typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL
+```
+And here you done !  
+  
 ## Namespaces 👨🏻‍🚀🚀  
   
 #### std::equal  
