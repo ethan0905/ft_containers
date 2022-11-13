@@ -86,6 +86,20 @@ class stack {
 ```
 
 ## Potential mistakes !
+#### Error: This file requires compiler and library support... for c++ 2011 standard [...]
+```
+/usr/include/c++/11/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+   32 | #error This file requires compiler and library support \
+      |  ^~~~~
+```
+To fix this, you should check in your files that you are not including libraries from c++11 that are not supported and which block compilation with the c++98 standard.  
+In my case, I forgot this include in my is_integral file:  
+```
+#include <iostream>
+// #include <type_traits>     <- this include is from c++11
+```
+And here you go!
+#### Error: invalide type argument of unary '*' (have int)
 ```
 vector.hpp:52:31: error: invalid type argument of unary ‘*’ (have ‘int’)
    52 |                     push_back(*it);
