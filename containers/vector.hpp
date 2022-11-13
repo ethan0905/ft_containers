@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/11 20:15:10 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/13 20:13:24 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <iostream>
 #include <memory>
 #include "stack.hpp"
+#include "../namespaces/enable_if.hpp"
+#include "../namespaces/is_integral.hpp"
 #include "../header/color.h"
 
 // std::allocator allows us to allocate memory for our vector and to deallocate         
@@ -45,19 +47,20 @@ namespace ft
                     _alloc.construct(_vector + i, val);
             }
             // use enable_if to check if the type is an iterator and is_integral to check if it's an integer
-            template <class InputIterator>
-            vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) {
+            template<class InputIterator>
+			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL)
+				: _alloc(alloc), _capacity(0), _size(0) {
+				// size_type count = last - first;
+				// _capacity = count;
+				// _vector = _alloc.allocate(count);
+				// for (size_type i = 0; i < count; i++) {
+				// 	_alloc.construct(_vector + i, *(first + i));
+				// }
+				// _size = _capacity;
                 std::cout << CYAN "Constructor with iterators" END << std::endl;
-                InputIterator it;
-                
-                while (first != last)
-                {
-                    it = *first;
-                    std::cout << "Here: " << (*first) << std::endl;
-                    // push_back(*it);
-                    first++;
-                }
-            }
+                for (InputIterator it = first; it != last; it++)
+                    push_back(*it);
+			};
             vector(const vector& x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0) {
                 std::cout << CYAN "Copy constructor" END << std::endl;
                 for (size_type i = 0; i < x._size; i++)
