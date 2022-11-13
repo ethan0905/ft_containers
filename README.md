@@ -86,7 +86,7 @@ class stack {
 ```
 
 ## Potential mistakes !
-#### Error: This file requires compiler and library support... for c++ 2011 standard [...]
+#### Error: this file requires compiler and library support... for c++ 2011 standard [...]
 ```
 /usr/include/c++/11/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
    32 | #error This file requires compiler and library support \
