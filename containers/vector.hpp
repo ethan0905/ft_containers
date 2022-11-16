@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: c2h6 <c2h6@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/13 20:30:56 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:22:49 by c2h6             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,96 @@ namespace ft
                     _capacity = n;
                 }
             }
+            // iterator
+            class iterator {
+                public:
+                    typedef T value_type;
+                    typedef T* pointer;
+                    typedef T& reference;
+                    typedef std::ptrdiff_t difference_type;
+                    typedef std::random_access_iterator_tag iterator_category;
+                private:
+                    pointer _ptr;
+                public:
+                    iterator() : _ptr(NULL) {}
+                    iterator(pointer ptr) : _ptr(ptr) {}
+                    iterator(const iterator& it) : _ptr(it._ptr) {}
+                    ~iterator() {}
+                    iterator& operator=(const iterator& it) {
+                        if (this != &it)
+                            _ptr = it._ptr;
+                        return (*this);
+                    }
+                    bool operator==(const iterator& it) const { 
+                        return (_ptr == it._ptr);
+                    }
+                    bool operator!=(const iterator& it) const { 
+                        return (_ptr != it._ptr);
+                    }
+                    bool operator<(const iterator& it) const { 
+                        return (_ptr < it._ptr);
+                    }
+                    bool operator<=(const iterator& it) const { 
+                        return (_ptr <= it._ptr);
+                    }
+                    bool operator>(const iterator& it) const { 
+                        return (_ptr > it._ptr);
+                    }
+                    bool operator>=(const iterator& it) const { 
+                        return (_ptr >= it._ptr);
+                    }
+                    iterator& operator++() { 
+                        _ptr++;
+                        return (*this);
+                    }
+                    iterator operator++(int) { 
+                        iterator tmp(*this);
+                        _ptr++;
+                        return (tmp);
+                    }
+                    iterator& operator--() { 
+                        _ptr--;
+                        return (*this);
+                    }
+                    iterator operator--(int) { 
+                        iterator tmp(*this);
+                        _ptr--;
+                        return (tmp);
+                    }
+                    iterator operator+(difference_type n) const { 
+                        std::cout << YELLOW "N value: "  << n << END << std::endl;
+                        return (iterator(_ptr + n));
+                    }
+                    iterator operator-(difference_type n) const { 
+                        std::cout << YELLOW "N value: "  << n << END << std::endl;
+                        return (iterator(_ptr - n));
+                    }
+                    iterator& operator+=(difference_type n) { 
+                        _ptr += n;
+                        return (*this);
+                    }
+                    iterator& operator-=(difference_type n) { 
+                        _ptr -= n;
+                        return (*this);
+                    }
+                    reference operator*() const { 
+                        return (*_ptr);
+                    }
+                    pointer operator->() const { 
+                        return (_ptr);
+                    }
+                    reference operator[](difference_type n) const { 
+                        return (*(_ptr + n));
+                    }
+            };
+            //begin and end
+            iterator begin() {
+                return (iterator(_vector));
+            }
+            iterator end() {
+                return (iterator(_vector + _size));
+            }
+            
     };
 }
 

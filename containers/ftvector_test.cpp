@@ -16,5 +16,9 @@ int main()
     //     std::cout << *it << " ";
     // std::cout << std::endl;
 
+    // test iterators    
+    std::cout << "vector_ft3: ";
+    for (ft::vector<int>::iterator it = vector_ft3.begin(); it != vector_ft3.end(); it++)
+        std::cout << *it << "\n";
     return (0);
 }

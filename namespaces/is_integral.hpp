@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_integral.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: c2h6 <c2h6@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:25:49 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/01 17:24:42 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:23:48 by c2h6             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define IS_INTEGRAL_HPP
 
 #include <iostream>
-#include <type_traits>
+// #include <type_traits>
 
 namespace ft
 {
