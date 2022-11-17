@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: c2h6 <c2h6@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/15 15:22:49 by c2h6             ###   ########.fr       */
+/*   Updated: 2022/11/17 14:54:33 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ namespace ft
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL)
 				: _alloc(alloc), _capacity(0), _size(0) {
                 std::cout << CYAN "Constructor with iterators called" END << std::endl;
-                for (InputIterator it = first; it != last; it++)
+                InputIterator it = first;
+                
+                for (; it != last; it++)
                     push_back(*it);
 			}
             vector(const vector& x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0) {
@@ -91,13 +93,21 @@ namespace ft
                 _size++;
             }
             // reserve
+            // penser a securiser
             void reserve(size_type n) {
                 if (n > _capacity) {
-                    pointer tmp = _alloc.allocate(n);
+                    pointer tmp = NULL;
+                    
+                    tmp = _alloc.allocate(n);
+                    if (tmp == NULL)
+                        return ;
+                    std::cout << "Tmp :" << &tmp << std::endl;
+                    std::cout << "n:" << n << std::endl;
+
                     for (size_type i = 0; i < _size; i++)
                         _alloc.construct(tmp + i, _vector[i]);
-                    for (size_type i = 0; i < _size; i++)
-                        _alloc.destroy(_vector + i);
+                    for (size_type j = 0; j < _size; j++)
+                        _alloc.destroy(_vector + j);
                     _alloc.deallocate(_vector, _capacity);
                     _vector = tmp;
                     _capacity = n;
