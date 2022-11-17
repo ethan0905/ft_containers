@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/17 14:54:33 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/17 15:53:04 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include "../namespaces/is_integral.hpp"
 #include "../header/color.h"
 
-// std::allocator allows us to allocate memory for our vector and to deallocate         
-
+// std::allocator allows us to allocate memory for our vector and to deallocate       
+            
 namespace ft
 {
     template<class T, class Allocator = std::allocator<T> >
@@ -49,17 +49,21 @@ namespace ft
             // use enable_if to check if the type is an iterator and is_integral to check if it's an integer
             template<class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL)
-				: _alloc(alloc), _capacity(0), _size(0) {
+				: _alloc(alloc), _capacity(0), _size(0), _vector(NULL) {
                 std::cout << CYAN "Constructor with iterators called" END << std::endl;
                 InputIterator it = first;
                 
                 for (; it != last; it++)
                     push_back(*it);
-			}
+                    // _alloc.construct(_vector + _size++, *it);
+            }
             vector(const vector& x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0) {
                 std::cout << CYAN "Copy constructor called" END << std::endl;
+                _vector = _alloc.allocate(x._size);
                 for (size_type i = 0; i < x._size; i++)
-                    push_back(x._vector[i]);
+                    _alloc.construct(_vector + i, x._vector[i]);
+                _size = x._size;
+                _capacity = x._capacity;
             }
             ~vector() {
                 std::cout << RED "Destructor called" END << std::endl;
@@ -96,11 +100,12 @@ namespace ft
             // penser a securiser
             void reserve(size_type n) {
                 if (n > _capacity) {
-                    pointer tmp = NULL;
-                    
-                    tmp = _alloc.allocate(n);
+                    pointer tmp = _alloc.allocate(n);
                     if (tmp == NULL)
+                    {
+                        std::cout << RED "Allocation failed" END << std::endl;
                         return ;
+                    }
                     std::cout << "Tmp :" << &tmp << std::endl;
                     std::cout << "n:" << n << std::endl;
 
@@ -108,7 +113,11 @@ namespace ft
                         _alloc.construct(tmp + i, _vector[i]);
                     for (size_type j = 0; j < _size; j++)
                         _alloc.destroy(_vector + j);
+                    std::cout << YELLOW "here" END << std::endl;
+                    std::cout << "Vector :" << &_vector << std::endl;
+                    std::cout << "Capacity :" << _capacity << std::endl;
                     _alloc.deallocate(_vector, _capacity);
+                    std::cout << YELLOW "here" END << std::endl;
                     _vector = tmp;
                     _capacity = n;
                 }
@@ -197,13 +206,17 @@ namespace ft
             };
             //begin and end
             iterator begin() {
+                std::cout << "Begin: " << _vector << std::endl;
                 return (iterator(_vector));
             }
             iterator end() {
+                std::cout << "End: " << _vector + _size << std::endl;
                 return (iterator(_vector + _size));
             }
             
     };
 }
+
+
 
 #endif
