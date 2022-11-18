@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/18 17:01:56 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/18 17:19:53 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft
             
         public:
             // Constructors
-            explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) { std::cout << CYAN "Default constructor" END << std::endl; }
+            explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) { /*std::cout << CYAN "Default constructor" END << std::endl;*/ }
             explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(_alloc.allocate(n)), _size(n), _capacity(n) {
                 // std::cout << CYAN "Constructor with n and val called" END << std::endl;
                 for (size_type i = 0; i < n; i++)
@@ -88,29 +88,6 @@ namespace ft
                         _alloc.construct(_vector + i, x._vector[i]); // push_back(x._vector[i]);
                 }
                 return (*this);
-            }
-            // push_back
-            void push_back(const value_type& val) {
-                if (_size == _capacity)
-                    reserve(_capacity + 1);
-                _alloc.construct(_vector + _size, val);
-                _size++;
-            }
-            // reserve
-            // penser a securiser
-            void reserve(size_type n) {
-                if (n > _capacity) {
-                    pointer tmp = _alloc.allocate(n);
-                    if (tmp == NULL)
-                        return ;
-                    for (size_type i = 0; i < _size; i++)
-                        _alloc.construct(tmp + i, _vector[i]);
-                    for (size_type j = 0; j < _size; j++)
-                        _alloc.destroy(_vector + j);
-                    _alloc.deallocate(_vector, _capacity);
-                    _vector = tmp;
-                    _capacity = n;
-                }
             }
             // iterator
             class iterator {
@@ -308,19 +285,56 @@ namespace ft
             const_iterator end() const {
                 return (const_iterator(_vector + _size));
             }
-
+            // Capacity
+            // checks whether the container is empty
             bool empty() const {
                 return (_size == 0);
             }
+            // returns the number of elements
             size_type size() const {
                 return (_size);
             }
+            // returns the maximum possible number of elements
             size_type max_size() const {
                 return (_alloc.max_size());
             }
+            // reserve storage
+            // penser a securiser
+            void reserve(size_type n) {
+                if (n > _capacity) {
+                    pointer tmp = _alloc.allocate(n);
+                    if (tmp == NULL)
+                        return ;
+                    for (size_type i = 0; i < _size; i++)
+                        _alloc.construct(tmp + i, _vector[i]);
+                    for (size_type j = 0; j < _size; j++)
+                        _alloc.destroy(_vector + j);
+                    _alloc.deallocate(_vector, _capacity);
+                    _vector = tmp;
+                    _capacity = n;
+                }
+            }
+            // returns the number of elements that can be held in currently allocated storage
             size_type capacity() const {
                 return (_capacity);
             }
+            // Modifiers:
+            // clears the contents
+            void clear() {
+                for (size_type i = 0; i < _size; i++)
+                    _alloc.destroy(_vector + i);
+                _size = 0;
+            }
+            // insert elements
+            // void insert
+            // push_back
+            void push_back(const value_type& val) {
+                if (_size == _capacity)
+                    reserve(_capacity + 1);
+                _alloc.construct(_vector + _size, val);
+                _size++;
+            }
+            // changes the number of elements stored
             void resize(size_type n, value_type val = value_type()) {
                 if (n > _size) {
                     if (n > _capacity)
@@ -330,10 +344,20 @@ namespace ft
                 }
                 _size = n;
             }
-            void clear() {
-                for (size_type i = 0; i < _size; i++)
-                    _alloc.destroy(_vector + i);
-                _size = 0;
+            // swaps the contents
+            void swap(vector& x) {
+                pointer vector_tmp = _vector;
+                size_type size_tmp = _size;
+                size_type capacity_tmp = _capacity;
+                
+                _vector = x._vector;
+                x._vector = vector_tmp;
+                
+                _size = x._size;
+                x._size = size_tmp;
+                
+                _capacity = x._capacity;
+                x._capacity = capacity_tmp;
             }
     };
 }
