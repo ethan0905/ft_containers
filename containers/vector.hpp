@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/18 17:19:53 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:01:10 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,13 @@ namespace ft
                 _alloc.construct(_vector + _size, val);
                 _size++;
             }
+            // removes the last element
+            void pop_back() {
+                if (_size > 0) {
+                    _alloc.destroy(_vector + _size - 1);
+                    _size--;
+                }
+            }
             // changes the number of elements stored
             void resize(size_type n, value_type val = value_type()) {
                 if (n > _size) {
@@ -361,7 +368,5 @@ namespace ft
             }
     };
 }
-
-
 
 #endif
