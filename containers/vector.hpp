@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/18 18:01:10 by esafar           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:34:43 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ namespace ft
             typedef Allocator allocator_type;
             typedef typename Allocator::pointer  pointer;
             typedef typename Allocator::size_type size_type;
+            typedef typename Allocator::reference reference;
+            typedef typename Allocator::const_reference const_reference;
             
         private:
             allocator_type _alloc;
@@ -88,6 +90,14 @@ namespace ft
                         _alloc.construct(_vector + i, x._vector[i]); // push_back(x._vector[i]);
                 }
                 return (*this);
+            }
+            reference operator[](size_type n)
+            {
+                return (_vector[n]);
+            }
+            const reference operator[](size_type n) const
+            {
+                return (_vector[n]);
             }
             // iterator
             class iterator {
@@ -326,7 +336,44 @@ namespace ft
                 _size = 0;
             }
             // insert elements
-            // void insert
+            iterator insert(iterator position, const value_type& val)
+            {
+                if (_size == _capacity)
+                    reserve(_capacity * 2);
+                size_type pos = position - begin();
+                for (size_type i = _size; i > pos; i--)
+                    _vector[i] = _vector[i - 1];
+                _vector[pos] = val;
+                _size++;
+                return (begin() + pos);
+            }
+            void insert(iterator position, size_type n, const value_type& val)
+            {
+                if (_size + n > _capacity)
+                    reserve(_capacity * 2);
+                size_type pos = position - begin();
+                for (size_type i = _size; i > pos; i--)
+                    _vector[i + n - 1] = _vector[i - 1];
+                for (size_type i = 0; i < n; i++)
+                    _vector[pos + i] = val;
+                _size += n;
+            }
+            template <class InputIterator>
+            void insert(iterator position, InputIterator first, InputIterator last,
+                        typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+            {
+                size_type n = 0;
+                for (InputIterator it = first; it != last; it++)
+                    n++;
+                if (_size + n > _capacity)
+                    reserve(_capacity * 2);
+                size_type pos = position - begin();
+                for (size_type i = _size; i > pos; i--)
+                    _vector[i + n - 1] = _vector[i - 1];
+                for (size_type i = 0; i < n; i++)
+                    _vector[pos + i] = *first++;
+                _size += n;
+            }
             // push_back
             void push_back(const value_type& val) {
                 if (_size == _capacity)
