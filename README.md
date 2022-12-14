@@ -25,7 +25,7 @@
 ## Tools (typedef, explicit, friend)  
   
 **1. typedef:** allows to give a new name to an existing data type.  
-````
+````bash
 template <class T, ...>
 class stack {
 	public:
@@ -39,14 +39,14 @@ class stack {
 ````
 
 **1.bis typename:** let the compiler know that Iter is a type and not a static member of std::vector  
-````
+````c
   
 typedef typename std::vector<T>::iterator Iter  
   
 ````
 
 **2. explicit:** allows only direct-initialization (avoid implicit conversions and copy initialization from braced-init-list).  
-````
+````c
 template <class T, class Container>
 class stack {
 	private:
@@ -71,7 +71,7 @@ int main()
 
 ````
 **3. friend:** allows a function to access private and protected members of a class.  
-````
+````c++
 template <class T, class Container>
 class stack {
 	private:
@@ -87,20 +87,20 @@ class stack {
 
 ## Potential mistakes !
 #### Error: this file requires compiler and library support... for c++ 2011 standard [...]
-````
+````bash
 /usr/include/c++/11/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
    32 | #error This file requires compiler and library support \
       |  ^~~~~
 ````
 To fix this, you should check in your files that you are not including libraries from c++11 that are not supported and which block compilation with the c++98 standard.  
 In my case, I forgot this include in my is_integral file:  
-````
+````b
 #include <iostream>
 // #include <type_traits>     <- this include is from c++11
 ````
 And here you go!
 #### Error: invalide type argument of unary '*' (have int)
-````
+````shell
 vector.hpp:52:31: error: invalid type argument of unary ‘*’ (have ‘int’)
    52 |                     push_back(*it);
       |                               ^~~
@@ -113,7 +113,7 @@ vector(InputIterator first, InputIterator last, const allocator_type& alloc = al
 }
 ````
 To fix this, you gonna need to use enable_if to check if the user pass as a 4th parameter an iterator, that has the type of an integral integer (is_integral)
-````
+````cpp
 typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL
 ````
 And here you done !  
