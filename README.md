@@ -138,7 +138,7 @@ And here you done !
 4. Enjoy ;)  
   
 ## 🗃️ Usefull documentation  
-### __std functions__
+### std functions
 #### std::equal  
 https://en.cppreference.com/w/cpp/algorithm/equal  
   
