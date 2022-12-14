@@ -2,12 +2,12 @@
   
 ## 📔 Summary
 
- - [🔢 Containers/Algorithm/Iterators](#-preview)
- - [⏱️ Strat for ft_containers ](#-features)
- - [🔨 Tools](#-object-generation)
- - [❗️ Potential mistakes !](#%EF%B8%8F-how-do-i-print-my-textures-)
- - [👨🏻‍🚀 Namespaces](#%EF%B8%8F-how-do-i-print-my-textures-)
+ - [🔢 Containers/Algorithm/Iterators](#-containersalgorithmiterators)
+ - [⏱️ Strat for ft_containers ](#%EF%B8%8F-strat-for-ft_containers)
+ - [🔨 Tools](#-tools-typedef-explicit-friend)
+ - [❗️ Potential mistakes !](#%EF%B8%8F-potential-mistakes-)
  - [⚙️ How to run the project ?](#%EF%B8%8F-how-to-run-the-project-)
+ - [👨🏻‍🚀 Namespaces](#-namespaces)
   
 ## 📚🔢📐 Containers/Algorithm/Iterators  
 #### In C++ STL (Standard Template Library), 3 things are meaningful and important:  
