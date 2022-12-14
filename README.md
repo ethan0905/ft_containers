@@ -94,7 +94,7 @@ class stack {
 ````
 To fix this, you should check in your files that you are not including libraries from c++11 that are not supported and which block compilation with the c++98 standard.  
 In my case, I forgot this include in my is_integral file:  
-````shell
+````c++
 #include <iostream>
 // #include <type_traits>     <- this include is from c++11
 ````
