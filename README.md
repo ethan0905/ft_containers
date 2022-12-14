@@ -1,13 +1,22 @@
 # ft_containers 📦📦📦 [![esafar's 42 ft_containers Score](https://badge42.vercel.app/api/v2/cl6l739qg00490gialxmtgsrk/project/2852806)](https://github.com/JaeSeoKim/badge42)
   
-## Containers/Algorithm/Iterators 📚🔢📐  
+## 📔 Summary
+
+ - [🔢 Containers/Algorithm/Iterators](#-preview)
+ - [⏱️ Strat for ft_containers ](#-features)
+ - [🔨 Tools](#-object-generation)
+ - [❗️ Potential mistakes !](#%EF%B8%8F-how-do-i-print-my-textures-)
+ - [👨🏻‍🚀 Namespaces](#%EF%B8%8F-how-do-i-print-my-textures-)
+ - [⚙️ How to run the project ?](#%EF%B8%8F-how-to-run-the-project-)
+  
+## 📚🔢📐 Containers/Algorithm/Iterators  
 #### In C++ STL (Standard Template Library), 3 things are meaningful and important:  
   
 **1. Containers:** These are used to manage collection of objects of a certain kind. Containers can be of two types: Sequence Containers (vector, deque, list) and Associative Containers (Set, Multiset, Map, Multimap).  
 **2. Algorithms:** These are used to process the elements of a collection. That is algorithms feed from containers and process those elements in a predefined way and may also push the results into the same/different container.  
 **3. Iterator:** These are used to step through the elements of collection of objects (aka containers).  
   
-## Strat for ft_containers ⏱️  
+## ⏱️ Strat for ft_containers  
   
 1. Start by coding all the following std functions, asked in the subject (you gonna be able to use them later, inside your containers)
 	- equal
@@ -22,7 +31,7 @@
 3. When your stack container works properly. start coding vector container and test it with your previously handmade stack container.  
 4. Final step, code map and drop a star on this repo for the time I saved you ;)    
   
-## Tools (typedef, explicit, friend)  
+## 🔨 Tools (typedef, explicit, friend)  
   
 **1. typedef:** allows to give a new name to an existing data type.  
 ````c++
@@ -85,7 +94,7 @@ class stack {
 
 ````
 
-## Potential mistakes !
+## ❗️ Potential mistakes !
 #### Error: this file requires compiler and library support... for c++ 2011 standard [...]
 ````shell
 /usr/include/c++/11/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
@@ -118,7 +127,11 @@ typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL
 ````
 And here you done !  
   
-## Namespaces 👨🏻‍🚀🚀  
+## ⚙️ How to run the project ?
+
+
+  
+## 👨🏻‍🚀🚀 Namespaces  
   
 #### std::equal  
 https://en.cppreference.com/w/cpp/algorithm/equal  
