@@ -7,7 +7,7 @@
  - [🔨 Tools](#-tools-typedef-explicit-friend)
  - [❗️ Potential mistakes !](#%EF%B8%8F-potential-mistakes-)
  - [⚙️ How to run the project ?](#%EF%B8%8F-how-to-run-the-project-)
- - [👨🏻‍🚀 Namespaces](#-namespaces)
+ - [🗃️ Usefull documentation](#-namespaces)
   
 ## 📚🔢📐 Containers/Algorithm/Iterators  
 #### In C++ STL (Standard Template Library), 3 things are meaningful and important:  
@@ -137,8 +137,8 @@ And here you done !
 `./ft_containers`  
 4. Enjoy ;)  
   
-## 👨🏻‍🚀🚀 Namespaces  
-  
+## 🗃️ Usefull documentation  
+### std functions
 #### std::equal  
 https://en.cppreference.com/w/cpp/algorithm/equal  
   
@@ -158,6 +158,7 @@ https://eli.thegreenplace.net/2014/sfinae-and-enable_if/
   
 #### std::iterator_traits  
 https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits  
-  
-## Usefull documentation 🗃️  
+
+### containers
+#### vector
 https://en.cppreference.com/w/cpp/container/vector  
