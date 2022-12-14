@@ -129,7 +129,13 @@ And here you done !
   
 ## ⚙️ How to run the project ?
 
-
+1. Clone the repository:  
+`git clone https://github.com/ethan0905/ft_containers.git`  
+2. Compile the project:  
+`make -j`  
+3. Run the program:  
+`./ft_containers`  
+4. Enjoy ;)  
   
 ## 👨🏻‍🚀🚀 Namespaces  
   
