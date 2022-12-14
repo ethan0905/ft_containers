@@ -7,7 +7,7 @@
  - [🔨 Tools](#-tools-typedef-explicit-friend)
  - [❗️ Potential mistakes !](#%EF%B8%8F-potential-mistakes-)
  - [⚙️ How to run the project ?](#%EF%B8%8F-how-to-run-the-project-)
- - [🗃️ Usefull documentation](#-namespaces)
+ - [🗃️ Usefull documentation](#%EF%B8%8F-usefull-documentation)
   
 ## 📚🔢📐 Containers/Algorithm/Iterators  
 #### In C++ STL (Standard Template Library), 3 things are meaningful and important:  
