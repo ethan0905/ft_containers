@@ -9,7 +9,7 @@
   
 ## Strat for ft_containers ⏱️  
   
-1. Start by coding all std functions asked in the subject (you gonna be able to use them later, inside your containers)
+1. Start by coding all the following std functions, asked in the subject (you gonna be able to use them later, inside your containers)
 	- equal
 	- lexicographical_compare
 	- is_integral
@@ -18,8 +18,8 @@
 	- enable_if
 	- iterator_traits
 	- reverse_iterator
-2. Then, begin coding stack as your first container using original vector from STL.  
-3. When your stack container works properly. start coding vector container and test it with your stack container.  
+2. Then, begin coding stack as your first container, and use original vector from STL to test it.  
+3. When your stack container works properly. start coding vector container and test it with your previously handmade stack container.  
 4. Final step, code map and drop a star on this repo for the time I saved you ;)    
   
 ## Tools (typedef, explicit, friend)  
