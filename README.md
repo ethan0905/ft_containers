@@ -25,7 +25,7 @@
 ## Tools (typedef, explicit, friend)  
   
 **1. typedef:** allows to give a new name to an existing data type.  
-````bash
+````c++
 template <class T, ...>
 class stack {
 	public:
@@ -39,7 +39,7 @@ class stack {
 ````
 
 **1.bis typename:** let the compiler know that Iter is a type and not a static member of std::vector  
-````c
+````c++
   
 typedef typename std::vector<T>::iterator Iter  
   
