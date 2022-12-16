@@ -17,6 +17,8 @@
 **3. Iterator:** These are used to step through the elements of collection of objects (aka containers).  
   
 ## ⏱️ Strat for ft_containers  
+
+At first, I didn't know where to start on this project. I spent quite some time thinking about an effective strategy, in order to finish the project faster. The following instructions are precious, and gives you an easy to understand roadmap.
   
 1. Start by coding all the following std functions, asked in the subject (you gonna be able to use them later, inside your containers)
 	- equal
