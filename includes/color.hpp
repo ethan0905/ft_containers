@@ -6,12 +6,11 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:31:38 by c2h6              #+#    #+#             */
-/*   Updated: 2022/10/26 18:28:14 by esafar           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:41:47 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+# pragma once
 
 #define RED "\033[1;31m"
 #define GREEN "\033[1;32m"
@@ -23,5 +22,3 @@
 #define WHITE "\033[1;37m"
 
 #define GREY "\033[1;90m"
-
-#endif

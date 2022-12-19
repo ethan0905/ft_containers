@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/11/18 18:34:43 by esafar           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:07:17 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,29 @@ namespace ft
             
         public:
             // Constructors
-            explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) { /*std::cout << CYAN "Default constructor" END << std::endl;*/ }
+            // Constructs an empty container, with no elements.
+            explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(NULL), _size(0), _capacity(0) {
+                 /*std::cout << CYAN "Default constructor" END << std::endl;*/ 
+            }
+            // Constructs a container with n elements. Each element is a copy of val.
             explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _vector(_alloc.allocate(n)), _size(n), _capacity(n) {
-                // std::cout << CYAN "Constructor with n and val called" END << std::endl;
+                // std::cout << CYAN "Fill range constructor called" END << std::endl;
                 for (size_type i = 0; i < n; i++)
                     _alloc.construct(_vector + i, val);
             }
-            // use enable_if to check if the type is an iterator and is_integral to check if it's an integer
+            // Constructs a container with as many elements as the range [first,last), with each element constructed from its corresponding element in that range, in the same order.
+            // The use of enable_if is to check if the type is an iterator and is_integral to check if it's an integer.
             template<class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL)
 				: _alloc(alloc), _vector(NULL), _capacity(0), _size(0) {
-                // std::cout << CYAN "Constructor with iterators called" END << std::endl;
+                // std::cout << CYAN "Range constructor called" END << std::endl;
                 InputIterator it = first;
                 
                 for (; it != last; it++)
                     push_back(*it);
                     // _alloc.construct(_vector + _size++, *it);
             }
+            // Constructs a container with a copy of each of the elements in x, in the same order.
             vector(const vector& x) : _alloc(x._alloc), _vector(NULL), _size(0), _capacity(0) {
                 // std::cout << CYAN "Copy constructor called" END << std::endl;
                 _vector = _alloc.allocate(x._size);
