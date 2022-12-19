@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/12/19 13:07:17 by esafar           ###   ########.fr       */
+/*   Updated: 2022/12/19 15:16:51 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include <iostream>
 #include <memory>
 #include "stack.hpp"
-#include "../namespaces/enable_if.hpp"
-#include "../namespaces/is_integral.hpp"
-#include "../header/color.h"
+#include "../std_functions/enable_if.hpp"
+#include "../std_functions/is_integral.hpp"
+#include "../includes/color.hpp"
 
 // std::allocator allows us to allocate memory for our vector and to deallocate       
             
