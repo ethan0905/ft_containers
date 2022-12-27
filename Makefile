@@ -6,7 +6,7 @@
 #    By: esafar <esafar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 13:23:13 by esafar            #+#    #+#              #
-#    Updated: 2022/12/19 17:30:11 by esafar           ###   ########.fr        #
+#    Updated: 2022/12/27 16:54:20 by esafar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@
 
 NAME = ft_containers
 
-SRC = containers/vector_test.cpp \
-	  containers/stack_test.cpp
+SRC = tests/containers/vector_test.cpp \
+	  tests/containers/stack_test.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -67,7 +67,7 @@ fclean: clean
 re: fclean all
 
 vector: $(OBJ)
-	@$(CC) $(CFLAGS) -o vector containers/vector_test.o
+	@$(CC) $(CFLAGS) -o vector tests/containers/vector_test.o
 	@echo "$(GREEN)$(NAME): vector executable created$(END)"
 	@echo "$(MAGENTA)"
 	@echo "      ___          ___          ___      ___          ___          ___      "
@@ -84,7 +84,7 @@ vector: $(OBJ)
 	@echo "$(END)"
 
 stack: $(OBJ)
-	@$(CC) $(CFLAGS) -o stack containers/stack_test.o
+	@$(CC) $(CFLAGS) -o stack tests/containers/stack_test.o
 	@echo "$(GREEN)$(NAME): stack executable created$(END)"
 	@echo "$(YELLOW)"
 	@echo "      ___      ___          ___          ___          ___      "

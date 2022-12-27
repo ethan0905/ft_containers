@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:00:54 by esafar            #+#    #+#             */
-/*   Updated: 2022/12/19 13:38:35 by esafar           ###   ########.fr       */
+/*   Updated: 2022/12/27 16:53:19 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stack>
 #include <vector>
 
-#include "stack.hpp"
+#include "../../srcs/containers/stack.hpp"
 
 int main(void)
 {
