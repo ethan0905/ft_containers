@@ -6,7 +6,7 @@
 /*   By: c2h6 <c2h6@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:56:32 by esafar            #+#    #+#             */
-/*   Updated: 2022/12/28 12:57:56 by c2h6             ###   ########.fr       */
+/*   Updated: 2022/12/28 13:04:41 by c2h6             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "../std_functions/equal.hpp"
 #include "../std_functions/is_integral.hpp"
 #include "../std_functions/lexicographical_compare.hpp"
+
+// std::allocator class is used to allocate memory for objects of a given type.
 
 namespace ft {
 
@@ -57,12 +59,10 @@ namespace ft {
     public:
 		// Constructors
         // Constructs an empty container, with no elements.
-		explicit vector(const allocator_type& alloc = allocator_type())
-		: _alloc(alloc), _ptr(NULL), _capacity(0), _size(0) {}
+		explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _ptr(NULL), _capacity(0), _size(0) {}
 
 		// Constructs a container with n elements. Each element is a copy of val.
-		explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
-		: _alloc(alloc), _ptr(NULL), _capacity(n), _size(n) {
+		explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _ptr(NULL), _capacity(n), _size(n) {
 			_ptr = _alloc.allocate(n);
 			for (size_type i = 0; i < n; i++)
 			_alloc.construct(_ptr + i, val);
@@ -70,9 +70,7 @@ namespace ft {
 
 		// Constructs a container with as many elements as the range [first,last), with each element constructed from its corresponding element in that range, in the same order.
 		template <class InputIterator>
-		vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
-		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
-		: _alloc(alloc), _size(0) {
+		vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL) : _alloc(alloc), _size(0) {
 			difference_type n = ft::distance(first, last);
 			_ptr = _alloc.allocate(n);
 			_capacity = n;
@@ -81,139 +79,138 @@ namespace ft {
 		}
 
 		// Copy constructor
-		vector(const vector& x)
-		: _alloc(allocator_type()), _ptr(NULL), _capacity(0), _size(0) {
+		vector(const vector& x) : _alloc(allocator_type()), _ptr(NULL), _capacity(0), _size(0) {
 			*this = x;
 		}
 
 		~vector() {
-		clear();
-		if (_capacity > 0)
-			_alloc.deallocate(_ptr, _capacity);
+			clear();
+			if (_capacity > 0)
+				_alloc.deallocate(_ptr, _capacity);
 		}
 
 		// Assign content
 		vector& operator=(const vector& x) {
-		if (this != &x) {
-			clear();
-			assign(x.begin(), x.end());
-		}
-		return (*this);
+			if (this != &x) {
+				clear();
+				assign(x.begin(), x.end());
+			}
+			return (*this);
 		}
 
 		// Iterators
 		iterator begin() {
-		return (iterator(_ptr));
+			return (iterator(_ptr));
 		}
 		const_iterator begin() const {
-		return (const_iterator(_ptr));
+			return (const_iterator(_ptr));
 		}
 
 		iterator end() {
-		return (iterator(_ptr + _size));
+			return (iterator(_ptr + _size));
 		}
 		const_iterator end() const {
-		return (const_iterator(_ptr + _size));
+			return (const_iterator(_ptr + _size));
 		}
 
 		reverse_iterator rbegin() {
-		return (reverse_iterator(end()));
+			return (reverse_iterator(end()));
 		}
 		const_reverse_iterator rbegin() const {
-		return (const_reverse_iterator(end()));
+			return (const_reverse_iterator(end()));
 		}
 
 		reverse_iterator rend() {
-		return (reverse_iterator(begin()));
+			return (reverse_iterator(begin()));
 		}
 		const_reverse_iterator rend() const {
-		return (const_reverse_iterator(begin()));
+			return (const_reverse_iterator(begin()));
 		}
 
 		// Capacity
 		size_type size() const {
-		return (_size);
+			return (_size);
 		}
 
 		size_type max_size() const {
-		return (_alloc.max_size());
+			return (_alloc.max_size());
 		}
 
 		void resize(size_type n, value_type val = value_type()) {
-		if (n > _capacity) reserve(n);
-		if (n >= _size) {
-			for (size_type i = _size; i < n; i++)
-			_alloc.construct(_ptr + i, val);
-		} else {
-			for (size_type i = n; i < _size; i++)
-			_alloc.destroy(_ptr + i);
-			_capacity = n;
-		}
-		_size = n;
+			if (n > _capacity) reserve(n);
+			if (n >= _size) {
+				for (size_type i = _size; i < n; i++)
+				_alloc.construct(_ptr + i, val);
+			} else {
+				for (size_type i = n; i < _size; i++)
+				_alloc.destroy(_ptr + i);
+				_capacity = n;
+			}
+			_size = n;
 		}
 
 		// Returns the size of the storage space currently allocated for the vector, expressed in terms of elements.
 		size_type capacity() const {
-		return (_capacity);
+			return (_capacity);
 		}
 
 		// Checks whether the container is empty
 		bool empty() const {
-		return (size() == 0 ? true : false);
+			return (size() == 0 ? true : false);
 		}
 
 		// Requests that the vector capacity be at least enough to contain n elements.
 		void reserve(size_type n) {
-		if (n > max_size()) {
-			throw (std::length_error("ft::vector::reserve"));
-		} else if (n > _capacity) {
-			pointer new_ptr = _alloc.allocate(n);
-			for (size_type i = 0; i < _size; i++)
-			_alloc.construct(new_ptr + i, *(_ptr + i));
-			_alloc.deallocate(_ptr, _capacity);
-			_ptr = new_ptr;
-			_capacity = n;
-		}
+			if (n > max_size()) {
+				throw (std::length_error("ft::vector::reserve"));
+			} else if (n > _capacity) {
+				pointer new_ptr = _alloc.allocate(n);
+				for (size_type i = 0; i < _size; i++)
+				_alloc.construct(new_ptr + i, *(_ptr + i));
+				_alloc.deallocate(_ptr, _capacity);
+				_ptr = new_ptr;
+				_capacity = n;
+			}
 		}
 
 		// Element access
 		// Returns a reference to the element at position n in the vector container.
 		reference operator[](size_type n) {
-		return (_ptr[n]);
+			return (_ptr[n]);
 		}
 		const_reference operator[](size_type n) const {
-		return (_ptr[n]);
+			return (_ptr[n]);
 		}
 
 		reference at(size_type n) {
-		if (n >= size()) {
-			throw (std::out_of_range("ft::vector::at"));
-		} else {
-			return (_ptr[n]);
-		}
+			if (n >= size()) {
+				throw (std::out_of_range("ft::vector::at"));
+			} else {
+				return (_ptr[n]);
+			}
 		}
 		const_reference at(size_type n) const {
-		if (n >= size()) {
-			throw (std::out_of_range("ft::vector::at"));
-		} else {
-			return (_ptr[n]);
-		}
+			if (n >= size()) {
+				throw (std::out_of_range("ft::vector::at"));
+			} else {
+				return (_ptr[n]);
+			}
 		}
 
 		// Returns a reference to the first element in the vector.
 		reference front() {
-		return (*begin());
+			return (*begin());
 		}
 		const_reference front() const {
-		return (*begin());
+			return (*begin());
 		}
 
 		// Returns a reference to the last element in the vector.
 		reference back() {
-		return (*(end() - 1));
+			return (*(end() - 1));
 		}
 		const_reference back() const {
-		return (*(end() - 1));
+			return (*(end() - 1));
 		}
 
 		// Modifiers
@@ -237,18 +234,18 @@ namespace ft {
 
 		// Adds a new element at the end of the vector, after its current last element. The content of val is copied (or moved) to the new element.
 		void push_back(const value_type& val) {
-		if (_size == _capacity)
-			empty() ? reserve(1) : reserve(_size * 2);
-		_alloc.construct(_ptr + _size, val);
-		_size++;
+			if (_size == _capacity)
+				empty() ? reserve(1) : reserve(_size * 2);
+			_alloc.construct(_ptr + _size, val);
+			_size++;
 		}
 
 		// Removes the last element in the vector, effectively reducing the container size by one.
 		void pop_back() {
-		if (_size > 0) {
-			_alloc.destroy(_ptr + (_size - 1));
-			_size--;
-		}
+			if (_size > 0) {
+				_alloc.destroy(_ptr + (_size - 1));
+				_size--;
+			}
 		}
 
 		// The vector is extended by inserting new elements before the element at the specified position, effectively increasing the container size by the number of elements inserted.
