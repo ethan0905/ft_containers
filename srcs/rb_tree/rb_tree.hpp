@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:20:05 by esafar            #+#    #+#             */
-/*   Updated: 2022/12/29 14:26:24 by esafar           ###   ########.fr       */
+/*   Updated: 2022/12/29 14:34:51 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,30 +79,30 @@ namespace ft {
 	template <typename NodePtr>
 	NodePtr get_min_node(NodePtr ptr, NodePtr nil) {
 		while (ptr->_left != nil)
-		ptr = ptr->_left;
+			ptr = ptr->_left;
 		return (ptr);
 	}
 	template <typename NodePtr>
 	NodePtr get_max_node(NodePtr ptr, NodePtr nil) {
 		while (ptr->_right != nil)
-		ptr = ptr->_right;
+			ptr = ptr->_right;
 		return (ptr);
 	}
 
 	template <typename NodePtr>
 	NodePtr get_next_node(NodePtr ptr, NodePtr nil) {
 		if (ptr->_right != nil)
-		return (get_min_node(ptr->_right, nil));
+			return (get_min_node(ptr->_right, nil));
 		while (!is_left_child(ptr))
-		ptr = ptr->_parent;
+			ptr = ptr->_parent;
 		return (ptr->_parent);
 	}
 	template <typename NodePtr>
 	NodePtr get_prev_node(NodePtr ptr, NodePtr nil) {
 		if (ptr->_left != nil)
-		return (get_max_node(ptr->_left, nil));
+			return (get_max_node(ptr->_left, nil));
 		while (!is_right_child(ptr))
-		ptr = ptr->_parent;
+			ptr = ptr->_parent;
 		return (ptr->_parent);
 	}
 
@@ -198,7 +198,7 @@ namespace ft {
 			typedef Key                                                         key_type;
 			typedef Comp                                                        compare_type;
 			typedef TreeNode<value_type>                                        node_type;
-			typedef TreeNode<value_type>*                                       node_pointer;
+			typedef TreeNode<value_type>*                                       node_pointer; // node_type*
 			typedef tree_iterator<value_type, node_type>                        iterator;
 			typedef tree_iterator<const value_type, node_type>                  const_iterator;
 			typedef Allocator                                                   allocator_type;
