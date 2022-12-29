@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rb_tree.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/29 12:20:05 by esafar            #+#    #+#             */
+/*   Updated: 2022/12/29 14:26:24 by esafar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include "../std_functions/pair.hpp"
@@ -8,10 +20,10 @@ namespace ft {
 
 		public:
 			template <class T>
-			operator T*() const { return (0); }
+			operator T*() const { return (0); } // T* is a pointer to T
 
 			template <class T, class U>
-			operator T U::*() const { return (0); }
+			operator T U::*() const { return (0); } // U::* is a pointer to member of U
 
 		private:
 			void operator&() const;
@@ -230,142 +242,142 @@ namespace ft {
 				insert(ref.begin(), ref.end());
 			}
 			~rbtree() {
-			delete_node_recursive(_end);
-			delete_node(_nil);
+				delete_node_recursive(_end);
+				delete_node(_nil);
 			}
 
 			rbtree& operator=(const rbtree& ref) {
-			if (this != &ref) {
-				rbtree tmp(ref);
-				swap(tmp);
-			}
-			return (*this);
+				if (this != &ref) {
+					rbtree tmp(ref);
+					swap(tmp);
+				}
+				return (*this);
 			}
 
 			// Iterators
 			iterator begin() {
-			return (iterator(_begin, _nil));
+				return (iterator(_begin, _nil));
 			}
 			const_iterator begin() const {
-			return (const_iterator(_begin, _nil));
+				return (const_iterator(_begin, _nil));
 			}
 
 			iterator end() {
-			return (iterator(_end, _nil));
+				return (iterator(_end, _nil));
 			}
 			const_iterator end() const {
-			return (const_iterator(_end, _nil));
+				return (const_iterator(_end, _nil));
 			}
 
 			// Capacity
 			bool empty() const {
-			return (_size == 0);
+				return (_size == 0);
 			}
 
 			size_type size() const {
-			return (_size);
+				return (_size);
 			}
 
 			size_type max_size() const {
-			return (_alloc.max_size());
+				return (_alloc.max_size());
 			}
 
 			// Modifiers
 			ft::pair<iterator, bool> insert(const value_type& value) {
-			node_pointer ptr = search_parent(value);
-			if (ptr != _end && is_equal(ptr->_value, value, _comp))
-				return (ft::make_pair(iterator(ptr, _nil), false));
-			return (ft::make_pair(iterator(insert_internal(value, ptr), _nil), true));
-			}
-			iterator insert(iterator position, const value_type& value) {
-			node_pointer ptr = search_parent(value, position.base());
-			if (ptr != _end && is_equal(ptr->_value, value, _comp))
-				return (iterator(ptr, _nil));
-			return (iterator(insert_internal(value, ptr), _nil));
+				node_pointer ptr = search_parent(value);
+				if (ptr != _end && is_equal(ptr->_value, value, _comp))
+					return (ft::make_pair(iterator(ptr, _nil), false));
+				return (ft::make_pair(iterator(insert_internal(value, ptr), _nil), true));
+				}
+				iterator insert(iterator position, const value_type& value) {
+				node_pointer ptr = search_parent(value, position.base());
+				if (ptr != _end && is_equal(ptr->_value, value, _comp))
+					return (iterator(ptr, _nil));
+				return (iterator(insert_internal(value, ptr), _nil));
 			}
 			template <class InputIterator>
 			void insert(InputIterator first, InputIterator last) {
-			for (; first != last; first++)
-				insert(*first);
+				for (; first != last; first++)
+					insert(*first);
 			}
 
 			iterator erase(iterator position) {
-			if (_size == 0)
-				return (iterator(_nil, _nil));
-			iterator tmp(position);
-			++tmp;
-			if (position == begin())
-				_begin = tmp.base();
-			--_size;
-			remove_internal(position.base());
-			delete_node(position.base());
-			return (tmp);
+				if (_size == 0)
+					return (iterator(_nil, _nil));
+				iterator tmp(position);
+				++tmp;
+				if (position == begin())
+					_begin = tmp.base();
+				--_size;
+				remove_internal(position.base());
+				delete_node(position.base());
+				return (tmp);
 			}
 			size_type erase(const key_type& value) {
-			iterator i(find_internal(value), _nil);
-			if (i == end())
-				return (0);
-			if (i == begin()) {
-				iterator tmp(i);
-				++tmp;
-				_begin = tmp.base();
-			}
-			--_size;
-			remove_internal(i.base());
-			delete_node(i.base());
-			return (1);
+				iterator i(find_internal(value), _nil);
+				if (i == end())
+					return (0);
+				if (i == begin()) {
+					iterator tmp(i);
+					++tmp;
+					_begin = tmp.base();
+				}
+				--_size;
+				remove_internal(i.base());
+				delete_node(i.base());
+				return (1);
 			}
 			void erase(iterator first, iterator last) {
-			for (; first != last;)
-				first = erase(first);
+				for (; first != last;)
+					first = erase(first);
 			}
 
 			void swap(rbtree& ref) {
-			std::swap(_nil, ref._nil);
-			std::swap(_begin, ref._begin);
-			std::swap(_end, ref._end);
-			std::swap(_comp, ref._comp);
-			std::swap(_alloc, ref._alloc);
-			std::swap(_size, ref._size);
+				std::swap(_nil, ref._nil);
+				std::swap(_begin, ref._begin);
+				std::swap(_end, ref._end);
+				std::swap(_comp, ref._comp);
+				std::swap(_alloc, ref._alloc);
+				std::swap(_size, ref._size);
 			}
 
 			void clear(void) {
-			rbtree tmp(_comp, _alloc);
-			swap(tmp);
+				rbtree tmp(_comp, _alloc);
+				swap(tmp);
 			}
 
 			// Observers
 			iterator find(const key_type& key) {
-			return (iterator(find_internal(key), _nil));
+				return (iterator(find_internal(key), _nil));
 			}
 			const_iterator find(const key_type& key) const {
-			return (const_iterator(find_internal(key), _nil));
+				return (const_iterator(find_internal(key), _nil));
 			}
 
 			iterator lower_bound(const key_type& key) {
-			return (iterator(lower_bound_internal(key), _nil));
+				return (iterator(lower_bound_internal(key), _nil));
 			}
 			const_iterator lower_bound(const key_type& key) const {
-			return (const_iterator(lower_bound_internal(key), _nil));
+				return (const_iterator(lower_bound_internal(key), _nil));
 			}
 
 			iterator upper_bound(const key_type& key) {
-			return (iterator(upper_bound_internal(key), _nil));
+				return (iterator(upper_bound_internal(key), _nil));
 			}
 			const_iterator upper_bound(const key_type& key) const {
-			return (const_iterator(upper_bound_internal(key), _nil));
+				return (const_iterator(upper_bound_internal(key), _nil));
 			}
 
 			ft::pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
-			return (equal_range_internal(key));
+				return (equal_range_internal(key));
 			}
 			ft::pair<iterator, iterator> equal_range(const key_type& key) {
-			return (equal_range_internal(key));
+				return (equal_range_internal(key));
 			}
 
 			// Allocator
 			allocator_type get_allocator() const {
-			return (_alloc);
+				return (_alloc);
 			}
 
 		private:

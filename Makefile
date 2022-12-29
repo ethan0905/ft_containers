@@ -6,7 +6,7 @@
 #    By: esafar <esafar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 13:23:13 by esafar            #+#    #+#              #
-#    Updated: 2022/12/27 16:54:20 by esafar           ###   ########.fr        #
+#    Updated: 2022/12/29 12:44:19 by esafar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@
 NAME = ft_containers
 
 SRC = tests/containers/vector_test.cpp \
-	  tests/containers/stack_test.cpp
+	  tests/containers/stack_test.cpp \
+	  main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -51,7 +52,8 @@ all: $(NAME)
 	@echo "$(END)"
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) main.o
+	@echo "$(GREEN)$(NAME): ft_containers executable created$(END)"
 
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
