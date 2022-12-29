@@ -1,5 +1,9 @@
 # ft_containers 📦📦📦 [![esafar's 42 ft_containers Score](https://badge42.vercel.app/api/v2/cl6l739qg00490gialxmtgsrk/project/2852806)](https://github.com/JaeSeoKim/badge42)
-  
+
+> You **must** implement the following c++ containers **from the Standard Library (STL) : *vector, stack and map***
+>
+> You also gonna rewrite **std:: functions** such as *equal, lexicographical_compare, is_integral, pair, make_pair, enable_if, iterator_traits and reverse_iterator.*
+
 ## 📔 Summary
 
  - [📚 Containers/Algorithm/Iterators](#-containersalgorithmiterators)
@@ -164,3 +168,6 @@ https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits
 ### containers
 #### vector
 https://en.cppreference.com/w/cpp/container/vector  
+
+#### map
+https://www.geeksforgeeks.org/introduction-to-red-black-tree/  
