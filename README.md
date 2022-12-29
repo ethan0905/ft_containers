@@ -1,6 +1,6 @@
 # ft_containers 📦📦📦 [![esafar's 42 ft_containers Score](https://badge42.vercel.app/api/v2/cl6l739qg00490gialxmtgsrk/project/2852806)](https://github.com/JaeSeoKim/badge42)
 
-> You must implement the following c++ containers **from the Standard Library (STL) : vector, stack and map**
+> You **must** implement the following c++ containers **from the Standard Library (STL) : *vector, stack and map***
 >
 > You also gonna rewrite **std:: functions** such as *equal, lexicographical_compare, is_integral, pair, make_pair, enable_if, iterator_traits and reverse_iterator.*
 
