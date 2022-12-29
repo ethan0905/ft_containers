@@ -168,3 +168,6 @@ https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits
 ### containers
 #### vector
 https://en.cppreference.com/w/cpp/container/vector  
+
+#### map
+https://www.geeksforgeeks.org/introduction-to-red-black-tree/  
