@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:20:05 by esafar            #+#    #+#             */
-/*   Updated: 2022/12/29 14:34:51 by esafar           ###   ########.fr       */
+/*   Updated: 2023/01/02 17:27:54 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,11 @@ namespace ft {
 			~tree_iterator() {}
 
 			tree_iterator& operator=(const tree_iterator& ref) {
-			if (this != &ref) {
-				_current = ref._current;
-				_nil = ref._nil;
-			}
-			return (*this);
+				if (this != &ref) {
+					_current = ref._current;
+					_nil = ref._nil;
+				}
+				return (*this);
 			}
 
 			node_pointer base()       const { return (_current); }
@@ -149,43 +149,43 @@ namespace ft {
 			reference    operator*()  const { return (_current->_value); }
 
 			tree_iterator& operator++() {
-			_current = get_next_node(_current, _nil);
-			return (*this);
+				_current = get_next_node(_current, _nil);
+				return (*this);
 			}
 			tree_iterator operator++(int) {
-			tree_iterator tmp(*this);
-			++(*this);
-			return (tmp);
+				tree_iterator tmp(*this);
+				++(*this);
+				return (tmp);
 			}
 
 			tree_iterator& operator--() {
-			_current = get_prev_node(_current, _nil);
-			return (*this);
+				_current = get_prev_node(_current, _nil);
+				return (*this);
 			}
 			tree_iterator operator--(int) {
-			tree_iterator tmp(*this);
-			--(*this);
-			return (tmp);
+				tree_iterator tmp(*this);
+				--(*this);
+				return (tmp);
 			}
 
 			template <typename T>
 			bool operator==(const tree_iterator<T, node_type>& x) const {
-			return (_current == x.base());
+				return (_current == x.base());
 			}
 			template <typename T>
 			bool operator!=(const tree_iterator<T, node_type>& x) const {
-			return !(*this == x);
+				return !(*this == x);
 			}
 
 			operator tree_iterator<const value_type, node_type>(void) const {
-			return (tree_iterator<const value_type, node_type>(_current, _nil));
+				return (tree_iterator<const value_type, node_type>(_current, _nil));
 			}
 
 			friend bool operator==(const tree_iterator& lhs, const tree_iterator& rhs) {
-			return (lhs._current == rhs._current);
+				return (lhs._current == rhs._current);
 			}
 			friend bool operator!=(const tree_iterator& lhs, const tree_iterator& rhs) {
-			return (!(lhs == rhs));
+				return (!(lhs == rhs));
 			}
   	};
 
@@ -216,8 +216,7 @@ namespace ft {
 			size_type       _size;
 
 		public:
-			rbtree(const compare_type& comp, const allocator_type& alloc)
-			: _comp(comp), _alloc(alloc), _size(size_type()) {
+			rbtree(const compare_type& comp, const allocator_type& alloc) : _comp(comp), _alloc(alloc), _size(size_type()) {
 				_nil = _alloc.allocate(1);
 				_alloc.construct(_nil, value_type());
 				_nil->_is_black = true;
@@ -228,8 +227,7 @@ namespace ft {
 				_end->_is_black = true;
 				_begin = _end;
 			}
-			rbtree(const rbtree& ref)
-			: _comp(ref._comp), _alloc(ref._alloc), _size(size_type()) {
+			rbtree(const rbtree& ref) : _comp(ref._comp), _alloc(ref._alloc), _size(size_type()) {
 				_nil = _alloc.allocate(1);
 				_alloc.construct(_nil, value_type());
 				_nil->_is_black = true;
@@ -285,6 +283,7 @@ namespace ft {
 			// Modifiers
 			ft::pair<iterator, bool> insert(const value_type& value) {
 				node_pointer ptr = search_parent(value);
+				
 				if (ptr != _end && is_equal(ptr->_value, value, _comp))
 					return (ft::make_pair(iterator(ptr, _nil), false));
 				return (ft::make_pair(iterator(insert_internal(value, ptr), _nil), true));
@@ -382,6 +381,7 @@ namespace ft {
 
 		private:
 
+			// return the node that is the parent of the node that should contain the value
 			node_pointer get_root() const {
 				return (_end->_left);
 			}
@@ -393,6 +393,7 @@ namespace ft {
 
 			node_pointer create_node(const value_type& value) {
 				node_pointer ptr = _alloc.allocate(1);
+				
 				_alloc.construct(ptr, value);
 				ptr->_parent = _nil;
 				ptr->_left = _nil;
@@ -428,6 +429,7 @@ namespace ft {
 				}
 				node_pointer cur = get_root();
 				node_pointer tmp = _end;
+			
 				for (; cur != _nil;) {
 					tmp = cur;
 					if (_comp(value, cur->_value))
@@ -442,6 +444,7 @@ namespace ft {
 
 			node_pointer insert_internal(const value_type& value, node_pointer parent) {
 				node_pointer ptr = create_node(value);
+				
 				if (parent == _end) {
 					set_root(ptr);
 				} else if (_comp(value, parent->_value)) {
@@ -455,6 +458,7 @@ namespace ft {
 				return (ptr);
 			}
 
+			// insert fixup function allows to keep the tree balanced after insertion of a new node
 			void insert_fixup(node_pointer ptr) {
 				while (is_red_color(ptr->_parent)) {
 					if (is_left_child(ptr->_parent)) {
@@ -466,8 +470,10 @@ namespace ft {
 				get_root()->_is_black = true;
 			}
 
+			// insert fixup function for left child
 			void insert_fixup_left(node_pointer& ptr) {
 				node_pointer uncle = ptr->_parent->_parent->_right;
+				
 				if (is_red_color(uncle)) {
 					ptr->_parent->_is_black = true;
 					uncle->_is_black = true;
@@ -484,8 +490,10 @@ namespace ft {
 				}
 			}
 
+			// insert fixup function for right child
 			void insert_fixup_right(node_pointer& ptr) {
 				node_pointer uncle = ptr->_parent->_parent->_left;
+				
 				if (is_red_color(uncle)) {
 					ptr->_parent->_is_black = true;
 					uncle->_is_black = true;
@@ -502,16 +510,19 @@ namespace ft {
 				}
 			}
 
+			// update the begin and size of the tree after insertion
 			void insert_update(const node_pointer ptr) {
 				if (_begin == _end || _comp(ptr->_value, _begin->_value))
 					_begin = ptr;
 				_size++;
 			}
 
+			// update the begin and size of the tree after deletion
 			void remove_internal(node_pointer ptr) {
 				node_pointer recolor_node;
 				node_pointer fixup_node = ptr;
 				bool original_color = is_black_color(ptr);
+				
 				if (ptr->_left == _nil) {
 					recolor_node = ptr->_right;
 					transplant(ptr, ptr->_right);
@@ -551,6 +562,7 @@ namespace ft {
 
 			void remove_fixup_left(node_pointer& ptr) {
 				node_pointer sibling = ptr->_parent->_right;
+				
 				if (is_red_color(sibling)) {
 					sibling->_is_black = true;
 					ptr->_parent->_is_black = false;
@@ -577,6 +589,7 @@ namespace ft {
 
 			void remove_fixup_right(node_pointer& ptr) {
 				node_pointer sibling = ptr->_parent->_left;
+				
 				if (is_red_color(sibling)) {
 					sibling->_is_black = true;
 					ptr->_parent->_is_black = false;
@@ -612,8 +625,10 @@ namespace ft {
 				latter->_parent = former->_parent;
 			}
 
+			// rotate nodes to left to maintain balance
 			void rotate_left(node_pointer ptr) {
 				node_pointer child = ptr->_right;
+				
 				ptr->_right = child->_left;
 				if (ptr->_right != _nil) {
 					ptr->_right->_parent = ptr;
@@ -631,8 +646,10 @@ namespace ft {
 				ptr->_parent = child;
 			}
 
+			// rotate nodes to right to maintain balance
 			void rotate_right(node_pointer ptr) {
 				node_pointer child = ptr->_left;
+				
 				ptr->_left = child->_right;
 				if (ptr->_left != _nil) {
 					ptr->_left->_parent = ptr;
@@ -650,23 +667,27 @@ namespace ft {
 				ptr->_parent = child;
 			}
 
+			// find first node of the tree
 			node_pointer find_internal(const key_type& value)const {
 				node_pointer ptr = get_root();
+				
 				while (ptr != _nil) {
-					if (_comp(value, ptr->_value)) {
+					if (_comp(value, ptr->_value)) { // value < ptr->_value
 						ptr = ptr->_left;
-					} else if (_comp(ptr->_value, value)) {
+					} else if (_comp(ptr->_value, value)) { // value > ptr->_value
 						ptr = ptr->_right;
-					} else {
-						return ptr;
+					} else { // equal
+						return ptr; // found
 					}
 				}
-				return _end;
+				return _end; // not found
 			}
-
+		
+		// find the first node whose key is not less than the given key
 		node_pointer lower_bound_internal(const key_type& key)const {
 			node_pointer ptr = get_root();
 			node_pointer tmp = _end;
+			
 			while (ptr != _nil) {
 				if (!_comp(ptr->_value, key)) {
 					tmp = ptr;
@@ -675,12 +696,14 @@ namespace ft {
 					ptr = ptr->_right;
 				}
 			}
-			return tmp;
+			return tmp; 
 		}
 
+		// find the first node whose key is greater than the given key
 		node_pointer upper_bound_internal(const key_type& key)const {
 			node_pointer ptr = get_root();
 			node_pointer tmp = _end;
+			
 			while (ptr != _nil) {
 				if (_comp(key, ptr->_value)) {
 					tmp = ptr;
@@ -695,24 +718,26 @@ namespace ft {
 		ft::pair<iterator, iterator> equal_range_internal(const key_type& value) {
 			node_pointer ptr = get_root();
 			node_pointer tmp = _end;
+			
 			while (ptr != _nil) {
-				if (_comp(value, ptr->_value)) {
+				if (_comp(value, ptr->_value)) { // value < ptr->_value
 					tmp = ptr;
 					ptr = ptr->_left;
-				} else if (_comp(ptr->_value, value)) {
+				} else if (_comp(ptr->_value, value)) { // value > ptr->_value
 					ptr = ptr->_right;
-				} else {
-					if (ptr->_right != _nil) {
-						tmp = get_min_node(ptr->_right, _nil);
+				} else { // equal
+					if (ptr->_right != _nil) { // if right child exists
+						tmp = get_min_node(ptr->_right, _nil); // find the min node of right subtree
 					}
-					return (ft::make_pair(iterator(ptr, _nil), iterator(tmp, _nil)));
+					return (ft::make_pair(iterator(ptr, _nil), iterator(tmp, _nil))); // return the pair of min node of right subtree + the node itself
 				}
 			}
-			return (ft::make_pair(iterator(tmp, _nil), iterator(tmp, _nil)));
+			return (ft::make_pair(iterator(tmp, _nil), iterator(tmp, _nil))); // return a pair of the same node if not found
 		}
 		ft::pair<const_iterator, const_iterator> equal_range_internal(const key_type& value)const {
 			node_pointer ptr = get_root();
 			node_pointer tmp = _end;
+			
 			while (ptr != _nil) {
 				if (_comp(value, ptr->_value)) {
 					tmp = ptr;
