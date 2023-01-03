@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esafar <esafar@student.42.fr>              +#+  +:+       +#+         #
+#    By: c2h6 <c2h6@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 13:23:13 by esafar            #+#    #+#              #
-#    Updated: 2022/12/29 12:44:19 by esafar           ###   ########.fr        #
+#    Updated: 2023/01/03 13:00:47 by c2h6             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME = ft_containers
 
 SRC = tests/containers/vector_test.cpp \
 	  tests/containers/stack_test.cpp \
+	  tests/containers/map_test.cpp \
 	  main.cpp
 
 OBJ = $(SRC:.cpp=.o)
@@ -63,7 +64,7 @@ clean:
 	@echo "$(RED)$(NAME): objects deleted$(END)"
 
 fclean: clean
-	@rm -f $(NAME) vector stack
+	@rm -f $(NAME) vector stack map
 	@echo "$(RED)$(NAME): deleted$(END)"
 
 re: fclean all
@@ -103,6 +104,8 @@ stack: $(OBJ)
 	@echo "$(END)"
 
 map: $(OBJ)
+	@$(CC) $(CFLAGS) -o map tests/containers/map_test.o
+	@echo "$(GREEN)$(NAME): map executable created$(END)"
 	@echo "$(GREEN)"
 	@echo "      ___          ___          ___      "
 	@echo "     /\__\        /\  \        /\  \     "

@@ -3,7 +3,6 @@
 #include <iostream>
 #include "../../incls/color.hpp"
 
-// write a main test for map container
 int main()
 {
     std::map<int, int> map;
