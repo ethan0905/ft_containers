@@ -141,6 +141,9 @@ And here you done !
 `make -j` or you can either choose which containers tests to compile: `make` + `vector`, `stack` or `map`  
 3. Run the program:  
 `./ft_containers <seed>`  
+`./vector`  
+`./stack`  
+`./map`  
 4. Enjoy ;)  
  
 ## 🗃️ Usefull documentation  
