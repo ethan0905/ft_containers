@@ -138,11 +138,11 @@ And here you done !
 1. Clone the repository:  
 `git clone https://github.com/ethan0905/ft_containers.git`  
 2. Compile the project:  
-`make -j`  
+`make -j` or you can either choose which containers tests to compile: `make` + `vector`, `stack` or `map`  
 3. Run the program:  
-`./ft_containers`  
+`./ft_containers <seed>`  
 4. Enjoy ;)  
-  
+ 
 ## 🗃️ Usefull documentation  
 ### std functions
 #### std::equal  
