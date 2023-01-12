@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rb_tree.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: c2h6 <c2h6@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:20:05 by esafar            #+#    #+#             */
-/*   Updated: 2023/01/02 17:27:54 by esafar           ###   ########.fr       */
+/*   Updated: 2023/01/12 17:52:46 by c2h6             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,31 @@ namespace ft {
 			}
   	};
 
+    template <typename Alloc>
+    struct allocator_traits {
+        typedef typename Alloc::value_type value_type;
+        typedef typename Alloc::pointer pointer;
+        typedef typename Alloc::const_pointer const_pointer;
+
+        static Alloc allocate(Alloc& a, std::size_t n) {
+            return a.allocate(n);
+        }
+
+        static void deallocate(Alloc& a, value_type* p, std::size_t n) {
+            a.deallocate(p, n);
+        }
+
+		template <typename T>
+		static void construct(Alloc& a, T* p, const T& val) {
+			a.construct(p, val);
+		}
+		
+		template <typename T>
+		static void destroy(Alloc& a, T* p) {
+			a.destroy(p);
+		}		
+    };
+
 	// RBTree
 	template <typename T, class Key, class Comp, class Allocator>
 	class rbtree {
@@ -203,7 +228,7 @@ namespace ft {
 			typedef tree_iterator<const value_type, node_type>                  const_iterator;
 			typedef Allocator                                                   allocator_type;
 			typedef typename allocator_type::template rebind<node_type>::other  node_allocator;
-			typedef std::allocator_traits<node_allocator>                       node_traits;
+			typedef ft::allocator_traits<node_allocator>                       node_traits;
 			typedef std::size_t                                                 size_type;
 			typedef std::ptrdiff_t                                              difference_type;
 
